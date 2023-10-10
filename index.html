@@ -35,7 +35,7 @@
         <script>
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
-        }).fitBounds([[1.2042121738593654,103.58315548112039],[1.5334991995845775,104.02930090111947]]);
+        }).fitBounds([[1.2447663949103822,103.69799206945311],[1.522815641659457,104.00740312945311]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -58,7 +58,7 @@
         function pop_TotalPlaces_1(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2"><strong>Location</strong><br />' + (feature.properties['Location'] !== null ? autolinker.link(feature.properties['Location'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['Location'] !== null ? autolinker.link(feature.properties['Location'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['Number of'] !== null ? autolinker.link(feature.properties['Number of'].toLocaleString()) : '') + '</td>\
@@ -71,6 +71,9 @@
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['longitude'] !== null ? autolinker.link(feature.properties['longitude'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['status'] !== null ? autolinker.link(feature.properties['status'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -111,7 +114,13 @@
         function pop_PendingPlaces_2(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2"><strong>Location</strong><br />' + (feature.properties['Location'] !== null ? autolinker.link(feature.properties['Location'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['Location'] !== null ? autolinker.link(feature.properties['Location'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Number of'] !== null ? autolinker.link(feature.properties['Number of'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Postal Cod'] !== null ? autolinker.link(feature.properties['Postal Cod'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['Latitude'] !== null ? autolinker.link(feature.properties['Latitude'].toLocaleString()) : '') + '</td>\
@@ -129,7 +138,7 @@
         rotationAngle: 0.0,
         rotationOrigin: 'center center',
         icon: L.icon({
-            iconUrl: 'markers/red-marker.svg',
+            iconUrl: 'markers/blue-marker.svg',
             iconSize: [57.0, 57.0]
         }),
                 interactive: true,
@@ -164,7 +173,7 @@
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((layer.feature.properties['Location'] !== null?String('<div style="color: #323232; font-size: 12pt; font-family: \'Helvetica\', sans-serif;">' + layer.feature.properties['Location']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_TotalPlaces_1'});
+            layer.bindTooltip((layer.feature.properties['Location'] !== null?String('<div style="color: #323232; font-size: 10pt; font-family: \'Helvetica\', sans-serif;">' + layer.feature.properties['Location']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_TotalPlaces_1'});
             labels.push(layer);
             totalMarkers += 1;
               layer.added = true;
@@ -177,7 +186,7 @@
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((layer.feature.properties['Location'] !== null?String('<div style="color: #323232; font-size: 12pt; font-family: \'Helvetica\', sans-serif;">' + layer.feature.properties['Location']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_PendingPlaces_2'});
+            layer.bindTooltip((layer.feature.properties['Location'] !== null?String('<div style="color: #323232; font-size: 10pt; font-family: \'Helvetica\', sans-serif;">' + layer.feature.properties['Location']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_PendingPlaces_2'});
             labels.push(layer);
             totalMarkers += 1;
               layer.added = true;
